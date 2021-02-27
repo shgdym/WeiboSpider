@@ -30,12 +30,12 @@ def save_img(img_url, file_name, file_path=r'/home/data/imgs'):
 
 sel_sql = "select id,picurl from spider_dt where picsstate='Pending'"
 pics = objMysql.getRows(sel_sql)
-k = 0
+
 for i in range(len(pics)):
     pic_str = pics[i][1]
     pic_list = pic_str.split("\n")
 
-    j = 0
+    
     weibo_id = str(pics[i][0])
     print('id', weibo_id)
     local_img = ''
@@ -58,8 +58,7 @@ for i in range(len(pics)):
         # tmp_url = pic_list[i]
         tmp_img = save_img(tmp_url, tmp_name)
         local_img += tmp_img
-        j += 1
-        k += 1
+
 
     # update mysql
     sql = "update spider_dt set picsstate='Processed',localimg='{}' where id={}".format(local_img,id)
