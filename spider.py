@@ -27,7 +27,7 @@ for i in range(len(weibo_data)):
     sql = """SELECT id
           FROM spider_dt
           WHERE weiboid = {}""".format(item['mblog']['id'])
-    query_res = objMysql.getFirstRow(sql)
+    query_res = objMysql.get_first_row(sql)
     if query_res:
         continue
 

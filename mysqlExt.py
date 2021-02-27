@@ -25,7 +25,7 @@ class MySql:
                                           port=self.port, charset='utf8mb4')
             self.cursor = self.dbconn.cursor()
 
-    def getRows(self, query_sql):
+    def get_rows(self, query_sql):
         """
         return select sql rows
         :param query_sql: select sql
@@ -35,24 +35,24 @@ class MySql:
         results = self.cursor.fetchall()
         return results
 
-    def getFirstRow(self, query_sql):
+    def get_first_row(self, query_sql):
         """
         return select sql first row
         :param query_sql:
         :return: row  type:set
         """
-        res = self.getRows(query_sql)
+        res = self.get_rows(query_sql)
         if len(res) == 0:
             return ""
         return res[0]
 
-    def getFirstRowColumn(self, query_sql):
+    def get_first_row_column(self, query_sql):
         """
         return select sql first row Column
         :param query_sql:
         :return: first row column type: str
         """
-        row = self.getFirstRow(query_sql)
+        row = self.get_first_row(query_sql)
         if row == "":
             return ""
         return row[0]
@@ -70,7 +70,7 @@ class MySql:
             with open(filename, 'a') as file_object:
                 file_object.write(query_sql)
 
-    def isTableExists(self, table_name):
+    def is_table_exists(self, table_name):
         """
         check table exists or not
         :param table_name:
@@ -79,29 +79,29 @@ class MySql:
         if table_name in self.cache:
             return True
         sql = "SHOW TABLES LIKE '" + table_name + "'"
-        t = self.getFirstRow(sql)
+        t = self.get_first_row(sql)
         if t:
             self.cache.append(t[0])
             return True
         return False
 
-    def getCreateTableSql(self, table_name):
+    def get_create_table_sql(self, table_name):
         """
         get CreateTable Sql by table name
         :param table_name:
         :return: CreateTable Sql
         """
         sql = "SHOW CREATE TABLE `" + table_name + "`"
-        first_row = self.getFirstRow(sql)
+        first_row = self.get_first_row(sql)
         return first_row[1]
 
-    def duplicateTable(self, default_tb, new_tb):
+    def duplicate_table(self, default_tb, new_tb):
         """
         duplicate Table by table name
         :param default_tb: default table name
         :param new_tb: new table name
         """
-        create_sql = self.getCreateTableSql(default_tb)
+        create_sql = self.get_create_table_sql(default_tb)
         search_text = "CREATE TABLE `" + default_tb + "`"
 
         if search_text not in create_sql:

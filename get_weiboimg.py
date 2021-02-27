@@ -29,7 +29,7 @@ def save_img(img_url, file_name, file_path=r'/home/data/imgs'):
 
 
 sel_sql = "select id,picurl from spider_dt where picsstate='Pending'"
-pics = objMysql.getRows(sel_sql)
+pics = objMysql.get_rows(sel_sql)
 
 for i in range(len(pics)):
     pic_str = pics[i][1]
