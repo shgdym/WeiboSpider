@@ -7,7 +7,7 @@ print("<< Start @ :", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) ,">>"
 
 objMysql = MySql()
 
-sel_sql = "select id,picurl from spider_1 where picsstate='Pending'"
+sel_sql = "select id,picurl from spider_dt where picsstate='Pending'"
 pics = objMysql.get_rows(sel_sql)
 
 def save_img(img_url,file_name,file_path=r'/home/data/imgs'):
