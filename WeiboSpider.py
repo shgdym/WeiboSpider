@@ -62,5 +62,4 @@ class WeiboSpider:
 
         sql = """INSERT INTO `{}` (`content`,`picurl`,`picstatus`,`weiboid`,`addtime`,`showtime`,`jsondata`) VALUE ('{}','{}','{}','{}','{}','{}','{}');""".format(
             self.weibo_table_name, insert_data['text'], insert_data['pics'], pic_status, insert_data['weibo_id'], time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), insert_data['add_time'], insert_data['json_data'])
-        print(sql)
         self.objMysql.query(sql)
