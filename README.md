@@ -1,6 +1,7 @@
 # 微博爬虫
 
-###数据库
+###数据库 
+```
     CREATE DATABASE /*!32312 IF NOT EXISTS*/`spiderdatabase`
 
     CREATE TABLE `spider_base` (
@@ -17,4 +18,4 @@
       UNIQUE KEY `idx_weiboid` (`WeiboID`),
       KEY `idx_picstate` (`PicStatus`)
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4
-
+```
