@@ -1,7 +1,10 @@
 import logging
 import logging.handlers
 import time
+import os
 
+if not os.path.exists('logs/'):
+    os.mkdir('logs/')
 
 LOG_FILENAME = 'logs/{}.log'.format(time.strftime("%y%m%d_%H%M%S"))
 logger = logging.getLogger()
