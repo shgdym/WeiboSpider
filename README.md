@@ -19,7 +19,7 @@ CREATE TABLE `spider_base` (
   `AddTime` datetime DEFAULT NULL,
   `ShowTime` varchar(255) DEFAULT NULL,
   `CommentCount` int(11) DEFAULT '0',
-  `JsonData` json DEFAULT NULL,
+  `JsonData` text,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `idx_weiboid` (`WeiboID`),
   KEY `idx_picstate` (`PicStatus`)
