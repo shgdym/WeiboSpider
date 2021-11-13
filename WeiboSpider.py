@@ -41,7 +41,7 @@ class WeiboSpider:
 
         return http_res.text
 
-    def PrepareMysql(self, weibo_user):
+    def prepareMysql(self, weibo_user):
         self.weibo_table_name = const.WEIBO_TABLE_PREFIX+weibo_user
 
         if not self.objMysql.is_table_exists(self.weibo_table_name):
@@ -55,7 +55,7 @@ class WeiboSpider:
             return False
         return True
 
-    def InsertData(self, insert_data):
+    def insertData(self, insert_data):
         pic_status = "Pending"
         if insert_data['pics'].strip() == '':
             pic_status = "Done"

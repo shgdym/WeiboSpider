@@ -23,7 +23,7 @@ for weibo_item in weibo_id_list:
         continue
 
     # 3. Prepare mysql
-    ws.PrepareMysql(weibo_user)
+    ws.prepareMysql(weibo_user)
 
     res = json.loads(weibo_data)
     weibo_data = res['data']['cards']
@@ -55,4 +55,4 @@ for weibo_item in weibo_id_list:
             if 'media_info' in item['mblog']['page_info'].keys():
                 insert_data['pics'] += item['mblog']['page_info']['media_info']['mp4_hd_url']
 
-        ws.InsertData(insert_data)
+        ws.insertData(insert_data)
