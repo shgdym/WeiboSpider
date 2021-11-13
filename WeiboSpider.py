@@ -1,8 +1,8 @@
 import requests
 from logger import logger
 from mysqlExt import MySql
-from const import const
 import time
+import json
 
 
 class WeiboSpider:
@@ -24,6 +24,16 @@ class WeiboSpider:
         return url
 
     @staticmethod
+    def readAccountJson():
+        try:
+            with open('account.json', 'r') as fp:
+                users = json.load(fp)
+                return users
+        except Exception as e:
+            logger.info('账号信息获取失败错误，原因为: ' + str(e))
+            logger.info('填写之前，在网站验证Json格式的正确性。')
+
+    @staticmethod
     def getWeiboData(weibo_data_url):
         """
         get weibo data
@@ -42,7 +52,7 @@ class WeiboSpider:
         return http_res.text
 
     def prepareMysql(self, weibo_user):
-        self.weibo_table_name = const.WEIBO_TABLE_PREFIX+weibo_user
+        self.weibo_table_name = 'weibo_spider_'+weibo_user
 
         if not self.objMysql.is_table_exists(self.weibo_table_name):
             self.objMysql.duplicate_table('spider_base', self.weibo_table_name)

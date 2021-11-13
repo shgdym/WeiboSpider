@@ -1,7 +1,9 @@
 import logging
 import logging.handlers
+import time
 
-LOG_FILENAME = 'get_weibo_data.log'
+
+LOG_FILENAME = 'logs/{}.log'.format(time.strftime("%y%m%d_%H%M%S"))
 logger = logging.getLogger()
 
 

@@ -1,21 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from const import const
 from WeiboSpider import WeiboSpider
 import json
 
 ws = WeiboSpider()
-weibo_id_list = const.WEIBO_ID
 
-for weibo_item in weibo_id_list:
-    weibo_user = weibo_item[0]
-    weibo_id = weibo_item[1]
+# get accounts from account.json
+account_list = ws.readAccountJson()
+
+for weibo_item in account_list:
+    weibo_user = weibo_item['uname']
+    weibo_id = weibo_item['uid']
+    print("Crawl <"+weibo_user+"> Start", flush=True)
 
     # 1. get weibo data url
     weibo_data_url = ws.getWeiboDataUrl(weibo_id)
     if not weibo_data_url:
         continue
+    print("\turl:"+weibo_data_url, flush=True)
 
     # 2. get weibo data
     weibo_data = ws.getWeiboData(weibo_data_url)
@@ -56,3 +59,5 @@ for weibo_item in weibo_id_list:
                 insert_data['pics'] += item['mblog']['page_info']['media_info']['mp4_hd_url']
 
         ws.insertData(insert_data)
+
+    print("Crawl <" + weibo_user + "> End", flush=True)
