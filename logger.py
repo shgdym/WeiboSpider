@@ -1,6 +1,10 @@
+import logging
 import logging.handlers
 import datetime
 import os
+
+
+logging.basicConfig(level=logging.INFO)
 
 if not os.path.exists('logs/'):
     os.mkdir('logs/')

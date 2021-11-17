@@ -107,7 +107,7 @@ class MySql:
             try:
                 sys.exit(0)
             except:
-                print('die')
+                mylogger.error('die')
         new_str = "CREATE TABLE `" + new_tb + "`"
         self.query(create_sql.replace(search_text, new_str, 1))
 

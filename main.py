@@ -3,6 +3,7 @@
 
 from WeiboSpider import WeiboSpider
 import json
+from logger import mylogger
 
 ws = WeiboSpider()
 
@@ -12,13 +13,13 @@ account_list = ws.readAccountJson()
 for weibo_item in account_list:
     weibo_user = weibo_item['uname']
     weibo_id = weibo_item['uid']
-    print("Crawl <"+weibo_user+"> Start", flush=True)
+    mylogger.info("\tCrawl <"+weibo_user+"> Start")
 
     # 1. get weibo data url
     weibo_data_url = ws.getWeiboDataUrl(weibo_id)
     if not weibo_data_url:
         continue
-    print("\turl:"+weibo_data_url, flush=True)
+    mylogger.info("\turl:"+weibo_data_url)
 
     # 2. get weibo data
     weibo_data = ws.getWeiboData(weibo_data_url)
@@ -60,4 +61,4 @@ for weibo_item in account_list:
 
         ws.insertData(insert_data)
 
-    print("Crawl <" + weibo_user + "> End", flush=True)
+    mylogger.info("\tCrawl <" + weibo_user + "> End")

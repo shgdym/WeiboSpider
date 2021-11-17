@@ -47,7 +47,7 @@ class WeiboSpider:
         http_res = requests.get(weibo_data_url)
         http_code = http_res.status_code
         if http_code != 200:
-            print('get http result error, please check!')
+            mylogger.info('get http result error, please check!')
 
         return http_res.text
 
