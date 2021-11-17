@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import pymysql
 from config import global_config
+from logger import mylogger
 
 __author__ = 'shgdym'
 DB_HOST = global_config.getRaw('mysql', 'DB_HOST')
@@ -9,7 +10,7 @@ DB_USER = global_config.getRaw('mysql', 'DB_USER')
 DB_PASS = global_config.getRaw('mysql', 'DB_PASS')
 DB_NAME = global_config.getRaw('mysql', 'DB_NAME')
 DB_PORT = int(global_config.getRaw('mysql', 'DB_PORT'))
-from logger import logger
+
 
 
 class MySql:
@@ -65,7 +66,7 @@ class MySql:
             self.cursor.execute(query_sql)
             self.dbconn.commit()
         except:
-            logger.info('ERROR QUERY SQL:'+query_sql)
+            mylogger.error('ERROR QUERY SQL:'+query_sql)
 
     def is_table_exists(self, table_name):
         """

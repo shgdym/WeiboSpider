@@ -1,5 +1,5 @@
 import requests
-from logger import logger
+from logger import mylogger
 from mysqlExt import MySql
 import time
 import json
@@ -17,7 +17,7 @@ class WeiboSpider:
         :return: WeiboDataUrl
         """
         if weibo_id == '':
-            logger.info('weibo url is empty, please check!')
+            mylogger.error('weibo url is empty, please check!')
             return False
         url = 'https://m.weibo.cn/api/container/getIndex?uid={}&t=0&type=uid&value={}&containerid=107603{}'.format(
             weibo_id, weibo_id, weibo_id)
@@ -30,8 +30,8 @@ class WeiboSpider:
                 users = json.load(fp)
                 return users
         except Exception as e:
-            logger.info('账号信息获取失败错误，原因为: ' + str(e))
-            logger.info('填写之前，在网站验证Json格式的正确性。')
+            mylogger.error('账号信息获取失败错误，原因为: ' + str(e))
+            mylogger.error('填写之前，在网站验证Json格式的正确性。')
 
     @staticmethod
     def getWeiboData(weibo_data_url):
@@ -41,7 +41,7 @@ class WeiboSpider:
         :return: weibo data
         """
         if weibo_data_url == '':
-            logger.info('weibo url is error, please check!')
+            mylogger.error('weibo url is error, please check!')
             return False
 
         http_res = requests.get(weibo_data_url)

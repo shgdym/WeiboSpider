@@ -1,25 +1,21 @@
-import logging
 import logging.handlers
-import time
+import datetime
 import os
 
 if not os.path.exists('logs/'):
     os.mkdir('logs/')
+all_logname = 'logs/all.log'
+err_logname = 'logs/error.log'
 
-LOG_FILENAME = 'logs/{}.log'.format(time.strftime("%y%m%d_%H%M%S"))
-logger = logging.getLogger()
+mylogger = logging.getLogger('mylogger')
+mylogger.setLevel(logging.INFO)
 
+rf_handler = logging.handlers.TimedRotatingFileHandler(all_logname, when='midnight', interval=1, backupCount=7, atTime=datetime.time(0, 0, 0, 0))
+rf_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
 
-def set_logger():
-    logger.setLevel(logging.INFO)
-    formatter = logging.Formatter('%(asctime)s -  '
-                                  '%(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s')
-    console_handler = logging.StreamHandler()
-    console_handler.setFormatter(formatter)
-    logger.addHandler(console_handler)
-    file_handler = logging.handlers.RotatingFileHandler(
-        LOG_FILENAME, maxBytes=10485760, backupCount=5, encoding="utf-8")
-    file_handler.setFormatter(formatter)
-    logger.addHandler(file_handler)
+f_handler = logging.FileHandler(err_logname)
+f_handler.setLevel(logging.ERROR)
+f_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(filename)s[:%(lineno)d] - %(message)s"))
 
-set_logger()
+mylogger.addHandler(rf_handler)
+mylogger.addHandler(f_handler)
