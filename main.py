@@ -43,10 +43,10 @@ for weibo_item in account_list:
             continue
 
         insert_data = {}
-        insert_data['text'] = item['mblog']['text']
+        insert_data['text'] = item['mblog']['text'].replace("'", "\\'")
         insert_data['add_time'] = item['mblog']['created_at']
         insert_data['weibo_id'] = item['mblog']['id']
-        insert_data['json_data'] = json.dumps(item, ensure_ascii=False)
+        insert_data['json_data'] = json.dumps(item, ensure_ascii=False).replace("'", "\\'")
 
 
         insert_data['pics'] = ''
