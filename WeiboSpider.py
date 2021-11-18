@@ -3,6 +3,7 @@ from logger import mylogger
 from mysqlExt import MySql
 import time
 import json
+import os
 
 
 class WeiboSpider:
@@ -26,7 +27,7 @@ class WeiboSpider:
     @staticmethod
     def readAccountJson():
         try:
-            with open('account.json', 'r') as fp:
+            with open(os.path.dirname(__file__)+'/account.json', 'r') as fp:
                 users = json.load(fp)
                 return users
         except Exception as e:
